@@ -1,0 +1,82 @@
+<h2>Control Flow</h2>
+<h3>if,for</h3>
+
+@if (isTrue) {
+    is true
+} @else {
+    is false
+}
+
+<ng-container *ngIf="isTrue; else isFalse">
+    is true
+</ng-container>
+<ng-template #isFalse>
+    is false
+</ng-template>
+
+@if (loadingData; as data) {
+    <ul>
+        @for (item of data; track item) {
+            <li>{{item}}</li>
+        }
+    </ul>
+} @else {
+    <p>carregando...</p>
+}
+
+<!--
+@for (item of loadingData; track item) {
+    <li>{{item}}</li>
+}
+-->
+
+<ng-container *ngIf="loadingData as data; else loading">
+ <ul>
+    <ng-container *ngFor="let item of data; trackBy: trackByFunction">
+        <li> {{ item }} </li>
+    </ng-container>
+ </ul>
+</ng-container>
+<ng-template #loading>
+    <p>Carregando...</p>
+</ng-template>
+
+<hr />
+
+<ng-container *ngFor="let i of nomes">
+    <p>{{ i.nome }}</p>
+</ng-container>
+
+<input #novoNome type="text">
+<button (click)="adicionarNomes(novoNome.value)">Add names</button>
+
+<hr />
+
+<ul>
+    <ng-container *ngIf="nomes.length === 0; else existsTable">
+        <p>Não possui valores</p>
+    </ng-container>
+    <ng-template #existsTable>
+        <ng-container *ngFor="let i of nomes">
+            <li> {{ i.nome }} </li>
+        </ng-container>
+    </ng-template>
+</ul>
+
+<hr />
+
+@switch (condition) {
+    @case('A') {
+        <p>A sua letra é: A</p>
+    }
+
+    @case('B') {
+        <p>A sua letra é: B</p>
+    }
+
+    @default {
+        <p>Não há dados!</p>
+    }
+}
+
+<hr />

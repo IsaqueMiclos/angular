@@ -1,0 +1,11 @@
+<h2>Deferrable Views</h2>
+
+@defer {
+    <app-new-component />
+} @placeholder {
+    <p>Place Holder</p>
+} @loading (minimum 5s) {
+    <p>Loading...</p>
+} @error {
+    <p>Load Failed</p>
+}
